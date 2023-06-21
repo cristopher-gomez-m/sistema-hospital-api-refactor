@@ -2,7 +2,6 @@ import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundExc
 import { CreateMedicoDto } from './dto/create-medico.dto';
 import { UpdateMedicoDto } from './dto/update-medico.dto';
 import { UserService } from '../user/user.service';
-import { HistorialClinicoService } from 'src/historial-clinico/historial-clinico.service';
 import { hash } from 'bcrypt';
 import { Rol } from "../rol/rol.entity";
 
@@ -10,7 +9,6 @@ import { Rol } from "../rol/rol.entity";
 export class MedicosService {
   constructor(
     private userService: UserService,
-    //private asd:HistorialClinicoService
   ){}
  async create(createMedicoDto: CreateMedicoDto) {
     const { email,password } = createMedicoDto;
