@@ -16,18 +16,27 @@ import { Consultorio } from './consultorios/entities/consultorio.entity';
 import { Cita } from './cita/entities/cita.entity';
 require('dotenv').config();
 @Module({
-  imports: [TypeOrmModule.forRoot({
-    type: 'postgres',
-    host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT),
-    username: process.env.DB_USERNAME,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    entities: [User,Rol,Consultorio,HistorialClinico,Cita],
-    synchronize: true,
-    //ssl: true,
-    //ssl: process.env.NODE_ENV !== 'development',
-  }), UserModule, AuthModule,RolModule, ConsultoriosModule, MedicosModule, HistorialClinicoModule, CitaModule],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      entities: [User, Rol, Consultorio, HistorialClinico, Cita],
+      synchronize: true,
+      //ssl: true,
+      //ssl: process.env.NODE_ENV !== 'development',
+    }),
+    UserModule,
+    AuthModule,
+    RolModule,
+    ConsultoriosModule,
+    MedicosModule,
+    HistorialClinicoModule,
+    CitaModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
