@@ -10,8 +10,8 @@ import { HistorialClinico } from 'src/historial-clinico/entities/historial-clini
 import { Cita } from 'src/cita/entities/cita.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([HistorialClinico,User,Cita])],
+  imports: [TypeOrmModule.forFeature([HistorialClinico, User, Cita])],
   controllers: [UserController],
-  providers: [UserService,UserRepository,HistorialClinicoService,HistorialClinicoRepository],
+  providers: [UserService, UserRepository, HistorialClinicoService, HistorialClinicoRepository],
 })
 export class UserModule {}

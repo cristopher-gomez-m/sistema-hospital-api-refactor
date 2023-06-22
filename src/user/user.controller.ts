@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body,Param, Delete, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/register-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -7,26 +7,26 @@ import { User } from './entities/user.entity';
 @ApiTags('user')
 @Controller('user')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor (private readonly userService: UserService) { }
 
   @ApiOperation({ summary: 'Crear usuario' })
   @ApiBody({ type: CreateUserDto })
   @ApiResponse({ status: 201, description: 'Usuario creado exitosamente' })
   @Post()
-  create(@Body() createUserDto: CreateUserDto) {
+  create (@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
 
   @ApiOperation({ summary: 'Obtener todos los pacientes' })
   @ApiResponse({ status: 200, description: 'Lista de todos los pacientes', type: User })
   @Get('pacientes')
-  findAllPacientes() {
+  findAllPacientes () {
     return this.userService.findAllPacientes();
   }
   @ApiOperation({ summary: 'Obtener todos los medicos' })
   @ApiResponse({ status: 200, description: 'Lista de todos los medicos', type: User })
   @Get('allMedicos')
-  findAllMedicos() {
+  findAllMedicos () {
     return this.userService.findAllMedicos();
   }
   /*
@@ -38,15 +38,15 @@ export class UserController {
   @ApiOperation({ summary: 'Obtener usuario por ID' })
   @ApiResponse({ status: 200, description: 'Usuario encontrado', type: User })
   @Get('prueba')
-  findOneById() {
+  findOneById () {
     return this.userService.findById(16);
   }
   @ApiOperation({ summary: 'Obtener historial por ID de usuario' })
   @ApiParam({ name: 'user_id', description: 'ID del usuario' })
   @ApiResponse({ status: 200, description: 'Historial del usuario', type: User })
   @Get('historial/:user_id')
-  findHistorial(@Param('user_id') user_id: string) {
-    return this.userService.findById(+user_id);
+  findHistorial (@Param('user_id') userId: string) {
+    return this.userService.findById(+userId);
   }
 
   @ApiOperation({ summary: 'Actualizar nombre y apellido del usuario' })
@@ -54,15 +54,15 @@ export class UserController {
   @ApiBody({ type: UpdateUserDto })
   @ApiResponse({ status: 200, description: 'Usuario actualizado exitosamente' })
   @Put(':user_id')
-  updateNombreYApellido(@Param('user_id') user_id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.updateNombreYApellido(+user_id, updateUserDto);
+  updateNombreYApellido (@Param('user_id') userId: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.updateNombreYApellido(+userId, updateUserDto);
   }
 
   @ApiOperation({ summary: 'Eliminar usuario por ID' })
   @ApiParam({ name: 'id', description: 'ID del usuario a eliminar' })
   @ApiResponse({ status: 200, description: 'Usuario eliminado exitosamente' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
+  remove (@Param('id') id: string) {
     return this.userService.remove(+id);
   }
 }
