@@ -6,8 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { HistorialClinicoRepository } from './historial-clinico.repository';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([HistorialClinico])],
+  imports: [TypeOrmModule.forFeature([HistorialClinico])],
   controllers: [HistorialClinicoController],
-  providers: [HistorialClinicoService,HistorialClinicoRepository]
+  providers: [HistorialClinicoService, HistorialClinicoRepository],
 })
 export class HistorialClinicoModule {}
