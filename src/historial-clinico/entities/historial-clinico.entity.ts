@@ -22,7 +22,7 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 23, description: 'Masa corporal del paciente', nullable: true })
     @Column({ nullable: true })
-      masa_corporal: number;
+      masaCorporal: number;
 
     @ApiProperty({ example: 37, description: 'Temperatura del paciente', nullable: true })
     @Column({ nullable: true })
@@ -30,15 +30,15 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 18, description: 'Frecuencia respiratoria del paciente', nullable: true })
     @Column({ nullable: true })
-      frecuencia_respiratoria: number;
+      frecuenciaRespiratoria: number;
 
     @ApiProperty({ example: 20, description: 'Presión arterial del paciente', nullable: true })
     @Column({ nullable: true })
-      presion_arterial: number;
+      presionArterial: number;
 
     @ApiProperty({ example: 70, description: 'Frecuencia cardíaca del paciente', nullable: true })
     @Column({ nullable: true })
-      frecuencia_cardiaca: number;
+      frecuenciaCardiaca: number;
 
     @ApiProperty({ example: true, description: 'Indicador de diabetes del paciente', nullable: true })
     @Column({ nullable: true })
@@ -46,7 +46,7 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 'Descripción de diabetes', description: 'Descripción de diabetes del paciente', nullable: true })
     @Column({ nullable: true, type: 'text' })
-      diabetes_descripcion: string;
+      diabetesDescripcion: string;
 
     @ApiProperty({ example: true, description: 'Indicador de afección tiroidea del paciente', nullable: true })
     @Column({ nullable: true })
@@ -54,7 +54,7 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 'Descripción de afección tiroidea', description: 'Descripción de afección tiroidea del paciente', nullable: true })
     @Column({ nullable: true, type: 'text' })
-      tiroideas_descripcion: string;
+      tiroideasDescripcion: string;
 
     @ApiProperty({ example: true, description: 'Indicador de hipertensión del paciente', nullable: true })
     @Column({ nullable: true })
@@ -62,7 +62,7 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 'Descripción de hipertensión', description: 'Descripción de hipertensión del paciente', nullable: true })
     @Column({ nullable: true, type: 'text' })
-      hipertension_descripcion: string;
+      hipertensionDescripcion: string;
 
     @ApiProperty({ example: true, description: 'Indicador de cardiopatía del paciente', nullable: true })
     @Column({ nullable: true })
@@ -70,7 +70,7 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 'Descripción de cardiopatía', description: 'Descripción de cardiopatía del paciente', nullable: true })
     @Column({ nullable: true, type: 'text' })
-      cardiopatia_descripcion: string;
+      cardiopatiaDescripcion: string;
 
     @ApiProperty({ example: true, description: 'Indicador de traumatismo del paciente', nullable: true })
     @Column({ nullable: true })
@@ -78,7 +78,7 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 'Descripción de traumatismo', description: 'Descripción de traumatismo del paciente', nullable: true })
     @Column({ nullable: true, type: 'text' })
-      traumatismo_descripcion: string;
+      traumatismoDescripcion: string;
 
     @ApiProperty({ example: true, description: 'Indicador de cáncer del paciente', nullable: true })
     @Column({ nullable: true })
@@ -86,7 +86,7 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 'Descripción de cáncer', description: 'Descripción de cáncer del paciente', nullable: true })
     @Column({ nullable: true, type: 'text' })
-      cancer_descripcion: string;
+      cancerDescripcion: string;
 
     @ApiProperty({ example: true, description: 'Indicador de otros problemas del paciente', nullable: true })
     @Column({ nullable: true })
@@ -94,5 +94,5 @@ export class HistorialClinico {
 
     @ApiProperty({ example: 'Descripción de otros problemas', description: 'Descripción de otros problemas del paciente', nullable: true })
     @Column({ nullable: true, type: 'text' })
-      otros_descripcion: string;
+      otrosDescripcion: string;
 }

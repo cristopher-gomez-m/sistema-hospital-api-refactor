@@ -36,7 +36,7 @@ export class UserService {
 
   findById (id: number): Promise<User> {
     return this.userRepository.findOne({
-      relations: ['rol', 'historial_clinico'],
+      relations: ['rol', 'historialClinico'],
       where: { id },
     });
   }
@@ -76,7 +76,7 @@ export class UserService {
 
   async remove (id: number) {
     const user = await this.userRepository.findOne({
-      relations: ['historial_clinico'],
+      relations: ['historialClinico'],
       where: { id },
     });
     if (!user) {
