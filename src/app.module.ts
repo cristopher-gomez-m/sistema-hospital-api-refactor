@@ -35,7 +35,8 @@ require('dotenv').config();
     ConsultoriosModule,
     MedicosModule,
     HistorialClinicoModule,
-    CitaModule,
+                
+            CitaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
