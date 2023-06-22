@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCitaDto } from './dto/create-cita.dto';
-import { UpdateCitaDto } from './dto/update-cita.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cita } from './entities/cita.entity';
 import { Repository } from 'typeorm';
@@ -50,13 +49,5 @@ export class CitaService {
       order: { id: 'DESC' },
       take: 1,
     });
-  }
-
-  update(id: number, updateCitaDto: UpdateCitaDto) {
-    return `This action updates a #${id} cita`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} cita`;
   }
 }

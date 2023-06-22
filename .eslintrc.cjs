@@ -19,7 +19,6 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
     semi: ['error', 'always'],
-    'space-before-function-paren': ['error', 'always'],
     'space-infix-ops': 'error',
 
     // Reglas de estilo

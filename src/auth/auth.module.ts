@@ -9,16 +9,23 @@ import { UserService } from 'src/user/user.service';
 import { HistorialClinico } from 'src/historial-clinico/entities/historial-clinico.entity';
 import { HistorialClinicoRepository } from 'src/historial-clinico/historial-clinico.repository';
 import { HistorialClinicoService } from 'src/historial-clinico/historial-clinico.service';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User,HistorialClinico]),
+    TypeOrmModule.forFeature([User, HistorialClinico]),
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1h' },
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService,UserService, UserRepository,HistorialClinicoService,HistorialClinicoRepository]
+  providers: [
+    AuthService,
+    UserService,
+    UserRepository,
+    HistorialClinicoService,
+    HistorialClinicoRepository,
+  ],
 })
 export class AuthModule {}
