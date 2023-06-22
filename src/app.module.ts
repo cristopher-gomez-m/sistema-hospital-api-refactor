@@ -14,6 +14,7 @@ import { User } from './user/entities/user.entity';
 import { Rol } from './rol/rol.entity';
 import { Consultorio } from './consultorios/entities/consultorio.entity';
 import { Cita } from './cita/entities/cita.entity';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 @Module({
   imports: [
@@ -26,8 +27,8 @@ require('dotenv').config();
       database: process.env.DB_NAME,
       entities: [User, Rol, Consultorio, HistorialClinico, Cita],
       synchronize: true,
-      //ssl: true,
-      //ssl: process.env.NODE_ENV !== 'development',
+      // ssl: true,
+      // ssl: process.env.NODE_ENV !== 'development',
     }),
     UserModule,
     AuthModule,

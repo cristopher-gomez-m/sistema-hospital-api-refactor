@@ -7,5 +7,5 @@ export class UpdateConsultorioDto  {
 
     @ApiProperty({ example: 1, description: 'ID del médico', required: true })
     @IsNotEmpty({ message: 'El médico no debe estar vacío' })
-      medico_id: number;
+      medicoId: number;
 }

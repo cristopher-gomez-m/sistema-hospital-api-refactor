@@ -22,7 +22,7 @@ export class ConsultoriosService {
     createConsultorioDto: CreateConsultorioDto,
   ): Promise<Consultorio> {
     try {
-      const id = createConsultorioDto.medico_id;
+      const id = createConsultorioDto.medicoId;
       const medico = await this.userService.findById(id);
       if (medico.rol.id !== 2) {
         throw new BadRequestException('Esa cuenta no pertenece a un medico');
@@ -86,7 +86,7 @@ export class ConsultoriosService {
           `Consultorio with ID ${consultorioId} not found`,
         );
       }
-      const id = updateConsultorioDto.medico_id;
+      const id = updateConsultorioDto.medicoId;
       const medico = await this.userService.findById(id);
       if (medico.rol.id !== 2) {
         throw new BadRequestException('Esa cuenta no pertenece a un medico');
