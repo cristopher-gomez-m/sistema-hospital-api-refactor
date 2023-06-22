@@ -48,7 +48,7 @@ export class User {
   @ApiProperty({ description: 'Historial clínico del usuario' })
   @OneToOne(() => HistorialClinico, { cascade: true })
   @JoinColumn()
-  historial_clinico: HistorialClinico;
+    historialClinico: HistorialClinico;
 
   @ApiProperty({ description: 'Lista de citas del usuario' })
   @OneToMany(() => Cita, cita => cita.user)

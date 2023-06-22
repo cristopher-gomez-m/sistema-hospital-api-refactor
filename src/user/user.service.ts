@@ -11,57 +11,55 @@ import { UpdateMedicoDto } from '../medicos/dto/update-medico.dto';
 
 @Injectable()
 export class UserService {
-  constructor(
+  constructor (
     @InjectRepository(User)
     private userRepository: UserRepository,
     private historialService: HistorialClinicoService,
-    //private historialRepository: HistorialClinicoRepository
+    // private historialRepository: HistorialClinicoRepository
   ) {}
-  async create(createUserDto: CreateUserDto) {
-    
+  async create (createUserDto: CreateUserDto) {
     const usuario = this.userRepository.create(createUserDto);
-  
     const historialClinico = new HistorialClinico();
     await this.historialService.save(historialClinico);
-    usuario.historial_clinico = historialClinico;
+    usuario.historialClinico = historialClinico;
     await this.userRepository.save(usuario);
     return usuario;
-    
+
   }
 
-  findByUsername(email: string) {
+  findByUsername (email: string) {
     return this.userRepository.find({
       relations: ['rol'],
       where: { email },
     });
   }
 
-  findById(id: number): Promise<User> {
+  findById (id: number): Promise<User> {
     return this.userRepository.findOne({
-      relations: ['rol','historial_clinico'],
+      relations: ['rol', 'historial_clinico'],
       where: { id },
     });
   }
 
-  findMedicoById(id: number): Promise<User> {
+  findMedicoById (id: number): Promise<User> {
     return this.userRepository.findOne({
       where: { id },
     });
   }
 
-  findAllPacientes() {
+  findAllPacientes () {
     return this.userRepository.find({
-      where: { rol:Equal(1) },
+      where: { rol: Equal(1) },
     });
   }
 
-  findAllMedicos() {
+  findAllMedicos () {
     return this.userRepository.find({
       where: { rol: Equal(2) },
     });
   }
-  
-  async findUsuariosSinConsultorio(consultorioIds: number[]){
+
+  async findUsuariosSinConsultorio (consultorioIds: number[]){
     return await this.userRepository.find({
       where: {
         id: Not(In(consultorioIds)),
@@ -70,32 +68,29 @@ export class UserService {
     });
   }
 
-  findOneByUsername(email: string) {
-    return this.userRepository.findOne({ 
+  findOneByUsername (email: string) {
+    return this.userRepository.findOne({
       relations: ['rol'],
       where: { email } });
   }
 
-  async remove(id: number) {
-    const user = await this.userRepository.findOne({ 
+  async remove (id: number) {
+    const user = await this.userRepository.findOne({
       relations: ['historial_clinico'],
-      where: { id }
+      where: { id },
     });
     if (!user) {
       throw new NotFoundException('Usuario no encontrado');
     }
     await this.userRepository.remove(user);
-    await this.historialService.remove(user.historial_clinico.id);
+    await this.historialService.remove(user.historialClinico.id);
   }
 
- 
-
-
-  async updateNombreYApellido(user_id: number,updateUserDto:UpdateUserDto): Promise<User> {
+  async updateNombreYApellido (userId: number, updateUserDto:UpdateUserDto): Promise<User> {
     // Obtener el usuario de la base de datos
     const user = await this.userRepository.findOne(
-      { 
-        where: { id:user_id }
+      {
+        where: { id: userId },
       }
     );
 
@@ -109,7 +104,7 @@ export class UserService {
     return updatedUser;
   }
 
-  async updateMedico( id: number,updateMedicoDto: UpdateMedicoDto){
-    return await this.userRepository.update(id,updateMedicoDto);
+  async updateMedico (id: number, updateMedicoDto: UpdateMedicoDto){
+    return await this.userRepository.update(id, updateMedicoDto);
   }
 }
