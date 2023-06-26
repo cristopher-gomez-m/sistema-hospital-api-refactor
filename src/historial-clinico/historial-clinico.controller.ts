@@ -4,11 +4,18 @@ import { UpdateHistorialClinicoDto } from './dto/update-historial-clinico.dto';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { HistorialClinico } from './entities/historial-clinico.entity';
 
+/**
+ * Controlador para manejar las operaciones relacionadas con los historiales clínicos.
+ */
 @Controller('historial-clinico')
 export class HistorialClinicoController {
   constructor (private readonly historialClinicoService: HistorialClinicoService) { }
 
-
+  /**
+   * Obtener un historial clínico por su ID.
+   * @param id ID del historial clínico.
+   * @returns El historial clínico encontrado.
+   */
   @ApiOperation({ summary: 'Obtener un historial clínico por su ID' })
   @ApiParam({ name: 'id', description: 'ID del historial clínico' })
   @ApiResponse({ status: 200, description: 'El historial clínico encontrado', type: HistorialClinico })
@@ -16,7 +23,12 @@ export class HistorialClinicoController {
   findOne (@Param('id') id: string) {
     return this.historialClinicoService.findOne(+id);
   }
-
+  /**
+   * Actualizar un historial clínico.
+   * @param id ID del historial clínico.
+   * @param updateHistorialClinicoDto Datos actualizados del historial clínico.
+   * @returns El historial clínico actualizado.
+   */
   @ApiOperation({ summary: 'Actualizar un historial clínico' })
   @ApiParam({ name: 'id', description: 'ID del historial clínico' })
   @ApiBody({ type: UpdateHistorialClinicoDto })
@@ -25,7 +37,11 @@ export class HistorialClinicoController {
   update (@Param('id') id: string, @Body() updateHistorialClinicoDto: UpdateHistorialClinicoDto) {
     return this.historialClinicoService.update(+id, updateHistorialClinicoDto);
   }
-
+  /**
+   * Eliminar un historial clínico.
+   * @param id ID del historial clínico.
+   * @returns Mensaje de éxito después de eliminar el historial clínico.
+   */
   @ApiOperation({ summary: 'Eliminar un historial clínico' })
   @ApiParam({ name: 'id', description: 'ID del historial clínico' })
   @ApiResponse({ status: 200, description: 'El historial clínico ha sido eliminado exitosamente' })

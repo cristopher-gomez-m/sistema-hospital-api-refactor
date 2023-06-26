@@ -1,0 +1,9 @@
+{
+  "entryPoints": ["src/main.ts",
+  "src/user/user.controller.ts",
+  "src/medicos/medicos.controller.ts"],
+  "out": "docs",
+  "includes": ["src/**/*.ts"],
+}
+
+  

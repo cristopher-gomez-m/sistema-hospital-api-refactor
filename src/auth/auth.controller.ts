@@ -8,6 +8,9 @@ import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /**
+   * Registra un usuario.
+   */
   @Post('register')
   @ApiOperation({ summary: 'Registra un usuario' })
   @ApiBody({ type: CreateUserDto })
@@ -19,6 +22,9 @@ export class AuthController {
     return this.authService.register(loginBody);
   }
 
+  /**
+   * Inicio de sesión.
+   */
   @Post('login')
   @ApiOperation({ summary: 'Inicio de sesión' })
   @ApiBody({ type: LoginUserDto })

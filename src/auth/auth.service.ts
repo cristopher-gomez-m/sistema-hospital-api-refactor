@@ -11,7 +11,9 @@ export class AuthService {
     private userService: UserService,
     private JwtService: JwtService,
   ) {}
-
+  /**
+   * Registra un nuevo usuario.
+   */
   async register(registerBody: CreateUserDto) {
     const { email, password } = registerBody;
     const usersExist = await this.userService.findOneByUsername(email);
@@ -21,7 +23,9 @@ export class AuthService {
     registerBody = { ...registerBody, password: plainToHash };
     return this.userService.create(registerBody);
   }
-
+  /**
+   * Inicia sesión de un usuario.
+   */
   async login(loginBody: LoginUserDto) {
     const { email, password } = loginBody;
     // al haber el mismo nickname, buscamos todos
