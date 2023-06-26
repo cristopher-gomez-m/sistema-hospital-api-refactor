@@ -7,6 +7,12 @@ import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
 export class CitaController {
   constructor(private readonly citaService: CitaService) {}
 
+  /**
+   * Crea una nueva cita.
+   *
+   * @param {CreateCitaDto} createCitaDto - Datos para crear una nueva cita.
+   * @returns {Promise<any>} - La cita creada.
+   */
   @ApiOperation({ summary: 'Crea una cita' })
   @ApiBody({
     type: CreateCitaDto,
@@ -21,6 +27,12 @@ export class CitaController {
     return this.citaService.create(createCitaDto);
   }
 
+  /**
+   * Obtiene la lista de citas asociadas a un usuario por su ID.
+   *
+   * @param {number} userId - ID del usuario.
+   * @returns {Promise<any>} - Lista de citas encontradas.
+   */
   @ApiOperation({ summary: 'Lista de citas' })
   @ApiParam({ name: 'user_id', description: 'ID del usuario' })
   @ApiResponse({ status: 200, description: 'Lista de citas encontradas' })
@@ -29,6 +41,12 @@ export class CitaController {
     return this.citaService.findAllById(userId);
   }
 
+  /**
+   * Busca la última cita por su ID.
+   *
+   * @param {string} id - ID de la cita.
+   * @returns {Promise<any>} - La última cita encontrada.
+   */
   @ApiOperation({ summary: 'Busca la última cita' })
   @ApiParam({ name: 'id', description: 'ID de la cita' })
   @ApiResponse({ status: 200, description: 'La última cita encontrada' })

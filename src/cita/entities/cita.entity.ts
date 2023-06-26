@@ -13,10 +13,12 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Cita {
+  // ID de la cita
   @ApiProperty({ description: 'ID de la cita', example: 1 })
   @PrimaryGeneratedColumn()
     id: number;
 
+  // Lista de consultorios asociados a la cita
   @ApiProperty({
     type: () => [Consultorio],
     description: 'Lista de consultorios asociados a la cita',
@@ -25,14 +27,17 @@ export class Cita {
   @JoinTable()
     consultorios: Consultorio[];
 
+  // Fecha de la cita
   @ApiProperty({ description: 'Fecha de la cita', example: '2023-06-15' })
   @Column({ type: 'varchar' })
     fecha: string;
 
+  // Hora de la cita
   @ApiProperty({ description: 'Hora de la cita', example: '09:00 AM' })
   @Column({ type: 'varchar' })
     hora: string;
 
+  // Usuario asociado a la cita
   @ApiProperty({ type: () => User, description: 'Usuario asociado a la cita' })
   @ManyToOne(() => User, (user) => user.citas)
   @JoinColumn({ name: 'user_id' })

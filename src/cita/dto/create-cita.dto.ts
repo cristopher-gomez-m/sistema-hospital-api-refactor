@@ -2,23 +2,27 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateCitaDto {
+  // ID del usuario
   @ApiProperty({ description: 'ID del usuario', example: 1 })
-  @IsNotEmpty()
-  @IsNumber()
+  @IsNotEmpty() // Campo no puede estar vacío
+  @IsNumber() // Debe ser un número
     userId: number;
 
+  // ID del consultorio
   @ApiProperty({ description: 'ID del consultorio', example: 1 })
-  @IsNotEmpty()
-  @IsNumber()
+  @IsNotEmpty() // Campo no puede estar vacío
+  @IsNumber() // Debe ser un número
     consultorioId: number;
 
+  // Fecha de la cita
   @ApiProperty({ description: 'Fecha de la cita', example: '2023-06-15' })
-  @IsNotEmpty()
-  @IsDateString()
+  @IsNotEmpty() // Campo no puede estar vacío
+  @IsDateString() // Debe ser una fecha válida
     fecha: string;
 
+  // Hora de la cita
   @ApiProperty({ description: 'Hora de la cita', example: '09:00 AM' })
-  @IsNotEmpty()
-  @IsString()
+  @IsNotEmpty() // Campo no puede estar vacío
+  @IsString() // Debe ser una cadena de texto
     hora: string;
 }
