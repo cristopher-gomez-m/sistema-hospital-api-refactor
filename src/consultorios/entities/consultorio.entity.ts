@@ -12,10 +12,20 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 export class Consultorio {
+  /**
+   * ID del consultorio.
+   *
+   * @type {number}
+   */
   @PrimaryGeneratedColumn()
   @ApiProperty({ example: 1, description: 'ID del consultorio' })
     id: number;
 
+  /**
+   * Especialidad del consultorio.
+   *
+   * @type {string}
+   */
   @Column({ length: 45 })
   @ApiProperty({
     example: 'Especialidad del consultorio',
@@ -23,6 +33,11 @@ export class Consultorio {
   })
     especialidad: string;
 
+  /**
+   * Médico asignado al consultorio.
+   *
+   * @type {User}
+   */
   @OneToOne(() => User, { cascade: false })
   @JoinColumn({ name: 'id_medico' })
   @ApiProperty({
@@ -31,6 +46,11 @@ export class Consultorio {
   })
     medico: User;
 
+  /**
+   * Lista de citas relacionadas al consultorio.
+   *
+   * @type {Cita[]}
+   */
   @ManyToMany(() => Cita, (cita) => cita.consultorios)
   @ApiProperty({
     type: () => Cita,

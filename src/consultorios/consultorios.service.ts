@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   BadRequestException,
   HttpException,
@@ -11,6 +12,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Consultorio } from './entities/consultorio.entity';
 import { Repository } from 'typeorm';
 import { UserService } from '../user/user.service';
+
 @Injectable()
 export class ConsultoriosService {
   constructor(
@@ -18,6 +20,13 @@ export class ConsultoriosService {
     private consultorioRepository: Repository<Consultorio>,
     private userService: UserService,
   ) {}
+
+  /**
+   * Crea un nuevo consultorio.
+   *
+   * @param {CreateConsultorioDto} createConsultorioDto - Datos para crear el consultorio.
+   * @returns {Promise<Consultorio>}
+   */
   async create(
     createConsultorioDto: CreateConsultorioDto,
   ): Promise<Consultorio> {
@@ -41,6 +50,11 @@ export class ConsultoriosService {
     }
   }
 
+  /**
+   * Obtiene todos los consultorios.
+   *
+   * @returns {Promise<Consultorio[]>}
+   */
   async findAll(): Promise<Consultorio[]> {
     const consultorios = await this.consultorioRepository.find({
       relations: ['medico'],
@@ -55,7 +69,14 @@ export class ConsultoriosService {
     return consultoriosSinPassword;
   }
 
-  async findOne(id: number) {
+  /**
+   * Obtiene un consultorio por su ID.
+   *
+   * @param {number} id - ID del consultorio.
+   * @returns {Promise<Consultorio>}
+   * @throws {HttpException} - Si el consultorio no se encuentra.
+   */
+  async findOne(id: number): Promise<Consultorio> {
     const consultorios = await this.consultorioRepository.find({
       relations: ['medico', 'medico.rol'],
       where: {
@@ -64,18 +85,26 @@ export class ConsultoriosService {
     });
     const consultorio = consultorios[0];
 
-    if (!consultorio)
+    if (!consultorio) {
       throw new HttpException('NOT_FOUND', HttpStatus.NOT_FOUND);
+    }
 
     const { medico, ...restoDatos } = consultorio;
     const medicoSinPassword = { ...medico, password: undefined };
     return { ...restoDatos, medico: medicoSinPassword };
   }
 
+  /**
+   * Actualiza un consultorio existente.
+   *
+   * @param {number} consultorioId - ID del consultorio.
+   * @param {UpdateConsultorioDto} updateConsultorioDto - Datos para actualizar el consultorio.
+   * @returns {Promise<Consultorio>}
+   */
   async update(
     consultorioId: number,
     updateConsultorioDto: UpdateConsultorioDto,
-  ) {
+  ): Promise<Consultorio> {
     try {
       const consultorio = await this.consultorioRepository.findOne({
         relations: ['medico'],
@@ -103,19 +132,29 @@ export class ConsultoriosService {
     }
   }
 
-  async findUsuariosSinConsultorio(){
+  /**
+   * Obtiene los usuarios sin consultorio.
+   *
+   * @returns {Promise<any>}
+   */
+  async findUsuariosSinConsultorio(): Promise<any> {
     const consultorios = await this.consultorioRepository.find({
       relations: ['medico'],
     });
     const consultorioIds = consultorios.map(
       (consultorio) => consultorio.medico.id,
     );
-    const usuariosSinConsultorio =
-      await this.userService.findUsuariosSinConsultorio(consultorioIds);
+    const usuariosSinConsultorio = await this.userService.findUsuariosSinConsultorio(consultorioIds);
     return usuariosSinConsultorio;
   }
 
-  remove(id: number) {
+  /**
+   * Elimina un consultorio.
+   *
+   * @param {number} id - ID del consultorio.
+   * @returns {Promise<any>}
+   */
+  remove(id: number): Promise<any> {
     return this.consultorioRepository.delete(id);
   }
 }
