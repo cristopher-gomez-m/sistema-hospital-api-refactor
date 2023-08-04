@@ -29,7 +29,7 @@ export class CreateCitaDto {
    */
   @ApiProperty({ description: 'Fecha de la cita', example: '2023-06-15' })
   @IsNotEmpty() // Campo no puede estar vacío
-  @IsDateString() // Debe ser una fecha válida
+  @IsDateString({}, { message: '¡El formato de fecha no es válido! Utilice el formato YYYY-MM-DD.' }) // Debe ser una fecha válida
     fecha: string;
 
   /**
